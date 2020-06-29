@@ -49,8 +49,7 @@
                     <td>
                         <!-- /Vistas-Categorias/crearCategoria.jsp -->
                        <a href="<%= request.getContextPath() %>/Usuarios?opcion=modificar&&id_u=<%= usu.getId()%>&&nombre_u=<%= usu.getNombre() %>&&apellido_u=<%= usu.getApellido() %>
-                          &&acorreo_u=<%= usu.getCorreo()%>&&clave_u=<%= usu.getClave() %>&&tipo_u=<%= usu.getTipo() %>&&estado_u=<%= usu.getEstado() %>
-                          &&pregunta_u=<%= usu.getPregunta() %>&&respuesta_u=<%= usu.getRespuesta() %> " class="btn btn-info btn-sm glyphicon glyphicon-edit" role="button" name="btnModificar">Editar</a>
+                          &&acorreo_u=<%= usu.getCorreo()%>&&clave_u=<%= usu.getClave() %>&&tipo_u=<%= usu.getTipo() %>&&estado_u=<%= usu.getEstado() %>&&pregunta_u=<%= usu.getPregunta() %>&&respuesta_u=<%= usu.getRespuesta() %> " class="btn btn-info btn-sm glyphicon glyphicon-edit" role="button" name="btnModificar">Editar</a>
                         
                         <a href="<%= request.getContextPath() %>/Usuarios?opcion=eliminar&&id=<%= usu.getId() %>" class="btn btn-danger btn-sm glyphicon glyphicon-remove" role="button">Eliminar</a>
                     </td>
