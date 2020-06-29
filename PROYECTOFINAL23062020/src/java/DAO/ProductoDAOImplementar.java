@@ -21,6 +21,10 @@ public class ProductoDAOImplementar implements ProductoDAO{
 
     @Override
     public List<Producto> Listar() {
+        java.util.Date utilDate = new java.util.Date();
+        long InMilisegundos = utilDate.getTime();
+       // java.sql.Date sqlDate = new java.sql.Date(InMilisegundos);
+        java.sql.Timestamp sqlTimestamp = new java.sql.Timestamp(InMilisegundos);
         this.conn = FactoryConexionBD.open(FactoryConexionBD.MySQL);
         
         StringBuilder miSQL = new StringBuilder();
@@ -39,7 +43,7 @@ public class ProductoDAOImplementar implements ProductoDAO{
                 producto.setEstado_producto(resultadoSQL.getInt("estado_producto"));
                 c.setNom_categoria(resultadoSQL.getString("nom_categoria"));
                 producto.setDes_producto(resultadoSQL.getString("des_producto"));
-                producto.setFecha_entrada(resultadoSQL.getDate("fecha_entrada"));
+                producto.setFecha_entrada(sqlTimestamp);
                 producto.setCategoria(c);
                 lista.add(producto);
                 
@@ -86,7 +90,27 @@ public class ProductoDAOImplementar implements ProductoDAO{
 
     @Override
     public boolean guardarPro(Producto producto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.conn  = FactoryConexionBD.open(FactoryConexionBD.MySQL);
+        boolean guarda = false;
+        
+        try{
+            if (producto.getId_producto()==0) {
+                StringBuilder miSQL = new StringBuilder();
+                
+                miSQL.append("SELECT INTO tb_producto(nom_producto, stock, precio, unidad_de_medida, estado_producto, categoria, des_producto, fecha_entrada)");
+                miSQL.append(producto.getNom_producto()+ "', ").append(producto.getStock()+"', ").append(producto.getPrecio()+"', ")
+                     .append(producto.getUnidad_de_medida()+"', ").append(producto.getEstado_producto()+"', ").append(producto.getCategoria()+"', ")
+                     .append(producto.getDes_producto()+"', ").append(producto.getFecha_entrada());
+                miSQL.append("): ");
+                this.conn.ejecutarSQL(miSQL.toString());
+            }else if (producto.getId_producto()>0){
+                
+            }
+        }catch(Exception e){
+        }finally{
+            this.conn.cerrarConexion();
+        }
+        return guarda;
     }
 
     @Override
