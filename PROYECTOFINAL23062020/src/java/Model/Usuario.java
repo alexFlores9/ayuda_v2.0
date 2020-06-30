@@ -33,9 +33,8 @@ public class Usuario {
     private  String pregunta;
     private String respuesta;
     private  Date fecha_registro;
-   
-
-    public Usuario() {
+    
+    public Usuario() {        
         this.id = 0;
         this.nombre = "";
         this.apellido = "";
@@ -45,9 +44,8 @@ public class Usuario {
         this.estado = 0;
         this.pregunta = "";
         this.respuesta = "";
-    //    this.fecha_registro= Date;
-        
-       
+        // Lo deje en date para reutilzar
+        this.fecha_registro = new Date();          
     }
 
     
