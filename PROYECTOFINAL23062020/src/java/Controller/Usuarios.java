@@ -7,6 +7,7 @@ package Controller;
 
 import DAO.UsuarioDAO;
 import DAO.UsuarioDAOImplementar;
+import Model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Date;
@@ -130,7 +131,29 @@ public class Usuarios extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            Usuario usuario = new Usuario();
+             
+        //Se efectua el casting o conversión de datos porque lo ingresado en el formulario es texto.
+        // int id = Integer.parseInt(request.getParameter("id"));
+        String nombre = request.getParameter("txtNomUsuario");
+        String apellido = request.getParameter("txtApellidoUsuario");
+        String correo = request.getParameter("txtCorreoUsuario");
+        String clave = request.getParameter("txtClaveUsuario");
+        int tipo = Integer.parseInt(request.getParameter("txtTipoUsuario"));
+        int estado = Integer.parseInt(request.getParameter("txtEstadoUsuario"));
+        String pregunta = request.getParameter("txtClaveUsuario");
+        String respuesta = request.getParameter("txtClaveUsuario");
+      //  usuario.setId(id);
+        usuario.setNombre(nombre);
+        usuario.setApellido(apellido);
+        usuario.setCorreo(correo);
+        usuario.setClave(clave);
+        usuario.setTipo(tipo);
+        usuario.setEstado(estado);
+        usuario.setPregunta(pregunta);
+        usuario.setRespuesta(respuesta);        
+        UsuarioDAO guardarUsuario = new UsuarioDAOImplementar();
+        guardarUsuario.guardarUsu(usuario);
     }
 
     /**
