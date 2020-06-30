@@ -12,6 +12,7 @@ import Factory.ConexionBD;
 import Factory.FactoryConexionBD;
 
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,11 +115,13 @@ public class UsuarioDAOImplementar implements UsuarioDAO{
         try{
             if(usuario.getId() == 0){
                 StringBuilder miSQL = new StringBuilder();
+                // Formatea la fecha
+                SimpleDateFormat fecha = new SimpleDateFormat("y-MM-dd hh:mm:ss");
                 //Agregar consulta SQL; el id_categoria es autoincrementable.
                 miSQL.append("INSERT INTO tb_usuario(nombre, apellido, correo, clave, tipo, estado, pregunta, respuesta, fecha_registro) VALUES ('");
                 miSQL.append(usuario.getNombre()+"','").append(usuario.getApellido()+ "','" ).append(usuario.getCorreo()+ "','" ).append(usuario.getClave() + "','" ).append(usuario.getTipo()+ "','" )
                 .append(usuario.getEstado()+ "', '" ).append(usuario.getPregunta()+ "','" ).append(usuario.getRespuesta()+ "','" )
-                .append(usuario.getFecha_registro()+" ' ");
+                .append(fecha.format(usuario.getFecha_registro())+" ' ");
                 miSQL.append(");");
                 //Invocar método para ejecutar la consulta.
                 this.conn.ejecutarSQL(miSQL.toString());
